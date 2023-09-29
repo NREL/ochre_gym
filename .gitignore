@@ -4,5 +4,4 @@
 ochre_gym/buildings/*/*.yaml
 *.log
 *.egg-info
-*.csv
 site/
