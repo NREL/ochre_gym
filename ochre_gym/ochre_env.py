@@ -385,7 +385,7 @@ class Reward:
             thermal_discocomfort_unit_cost (float): unit cost of thermal discomfort.
             reward_scale (float): reward scale (Default is 1.)
             dr_type (string): types of DR programs: 'TOU', 'PC' and 'RTP'.
-            dr_scenario (string): The name of the subfolder in `ochre_gym/energy_price` containing the DR files.
+            dr_subfolder (string): The name of the subfolder in `ochre_gym/energy_price` containing the DR files.
             flat_energy_price (float): energy price in $/kWh.
             tou_price_file (string): name of the file in which TOU daily series is
               stored.

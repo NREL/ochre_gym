@@ -47,9 +47,9 @@ def parse_dwelling_args(
         time, units = dwelling_dict['initialization_time'].split(' ')
         dwelling_dict['initialization_time'] = dt.timedelta(**{units: int(time)})
     
-    dwelling_dict['hpxml_file'] = str(THIS_PATH / building_path / dwelling_dict['hpxml_file'])
-    dwelling_dict['schedule_input_file'] = str(THIS_PATH / building_path / dwelling_dict['schedule_input_file'])
-    dwelling_dict['weather_file'] = str(THIS_PATH / building_path / dwelling_dict['weather_file'])
+    dwelling_dict['hpxml_file'] = str(building_path / 'home.xml')
+    dwelling_dict['schedule_input_file'] = str(building_path / 'schedules.csv')
+    dwelling_dict['weather_file'] = str(building_path / dwelling_dict['weather_file'])
 
     return dwelling_dict
 
@@ -60,7 +60,7 @@ def load(
     **kwargs
 ):
     """Load an ochre_gym Env by name. Override default arguments with kwargs.
-    Default arguments can be found in the dwelling.toml file for each building.
+    Default arguments can be found in the defaults.toml file in ochre_gym/buildings.
 
     Args:
         env_name (str): Name of the building environment.
@@ -117,8 +117,8 @@ def load(
     exp_config = {}
     config_dir = THIS_PATH / 'buildings' / env_name
     energy_price_dir = THIS_PATH / 'energy_price' / kwargs.get('dr_subfolder', env_name)
-    with open(config_dir / 'dwelling.toml', 'rb') as f:
-        dwelling_args = tomli.load(f)['dwelling']
+    with open(THIS_PATH / 'buildings' / 'defaults.toml', 'rb') as f:
+        default_args = tomli.load(f)['defaults']
 
     exp_config['env_name'] = env_name
 
@@ -126,58 +126,61 @@ def load(
     # Parse kwargs
     #############################
 
-    # Override default arguments in dwelling_args with kwargs
+    # Override default arguments with kwargs
     for k, v in kwargs.items():
-        if k in dwelling_args and k != 'actions':
-            dwelling_args[k] = v
+        if k in default_args and k != 'actions':
+            default_args[k] = v
 
-    # Store actions in the user config, grab defaults
-    # from dwelling args but override them 
+    # Store actions in the user config, grab defaults, override them 
     # Rename actions to correct format
     new_keys = []
-    for k,v in dwelling_args['actions'].items():
+    for k,v in default_args['actions'].items():
         new_keys += [ (k,k.replace('_', ' ')) ]
     for k, k_ in new_keys:
-        dwelling_args['actions'][k_] = dwelling_args['actions'].pop(k)
+        default_args['actions'][k_] = default_args['actions'].pop(k)
 
     exp_config['actions'] = {}
     if not 'override_equipment_controls' in kwargs:
-        for k, v in dwelling_args['actions'].items():
+        for k, v in default_args['actions'].items():
             exp_config['actions'][k] = v
     else:
         exp_config['actions'] = kwargs['override_equipment_controls']
 
-    dwelling_args.pop('actions')
+    default_args.pop('actions')
     exp_config['vectorize_actions'] = kwargs.get('vectorize_actions', True)
 
     exp_config['reward'] = {'dr_subfolder': energy_price_dir}
-    for k, v in dwelling_args['reward'].items():
+    for k, v in default_args['reward'].items():
         if not k in kwargs:
             exp_config['reward'][k] = v
         else: # override
             exp_config['reward'][k] = kwargs[k]
-    dwelling_args.pop('reward')
+    default_args.pop('reward')
 
     # Validate DR type
     if exp_config['reward']['dr_type'] not in list(Reward.DR_TYPES_AND_DEFAULT_OBS.keys()):
         raise ValueError('Invalid DR Program type: {}'.format(exp_config['reward']['dr_type']))
     
     exp_config['lookahead'] = kwargs.get('lookahead', 
-                                         dwelling_args['observations']['lookahead'])
-    dwelling_args.pop('observations')
+                                         default_args['observations']['lookahead'])
+    default_args.pop('observations')
 
     # Parse args
-    dwelling_args = parse_dwelling_args(dwelling_args, config_dir)
+    if default_args['weather_file'] == '':
+        # return all files ending in .epw in config_dir
+        weather_file = [f for f in config_dir.glob('*.epw')][0]
+        default_args['weather_file'] = weather_file.name
+    default_args = parse_dwelling_args(default_args, config_dir)
 
     #############################
     # Configure logging
     #############################
     log_output = kwargs.get('log_output_filepath', 'ochre_gym.log')
     logger, handler_types = None, []
-    log_to_file = kwargs.get('log_to_file', dwelling_args['log_to_file'])
-    log_to_console = kwargs.get('log_to_console', dwelling_args['log_to_console'])
-    dwelling_args.pop('log_to_file')
-    dwelling_args.pop('log_to_console')
+    log_to_file = kwargs.get('log_to_file', default_args['log_to_file'])
+    log_to_console = kwargs.get('log_to_console', default_args['log_to_console'])
+    default_args.pop('log_to_file')
+    default_args.pop('log_to_console')
     if log_to_file:
         handler_types += ['file']
     if log_to_console:
@@ -189,12 +192,12 @@ def load(
     # Create and configure environment
     ##################################
     env = OchreEnv(exp_config['env_name'],
-                   dwelling_args,
+                   default_args,
                    exp_config['actions'],
                    exp_config['vectorize_actions'],
                    exp_config['lookahead'],
                    exp_config['reward'],
-                   dwelling_args['disable_uncontrollable_loads'],  
+                   default_args['disable_uncontrollable_loads'],  
                    vectorize_observations=kwargs.get('vectorize_observations', True),
                    use_all_ochre_observations=kwargs.get('use_all_ochre_observations', True),
                    override_ochre_observations_with_keys=kwargs.get('override_ochre_observations_with_keys', None), 
@@ -213,7 +216,7 @@ def load(
             pprint.pformat(exp_config, indent=4)
         ))
         logger.info('Dwelling configuration:\n{}'.format(
-            pprint.pformat(dwelling_args, indent=4)
+            pprint.pformat(default_args, indent=4)
         ))
     
     return env

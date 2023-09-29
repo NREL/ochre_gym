@@ -77,6 +77,7 @@ class OchreObservationSpaceBaseConfig(ABC):
 
         Args:
             observations (Dict): A dictionary of observations.
+        
         Returns:
             observations (Dict): A dictionary of observations.
         """
@@ -94,6 +95,7 @@ class OchreObservationSpaceBaseConfig(ABC):
             observations (Dict): A dictionary of observations.
             ochre_control_result (Dict): A dictionary of control results from OCHRE.
             args (Dict): A dictionary of extra info to help create the desired observation.
+        
         Returns:
             observations (Dict): The customized dictionary of observations.
         """
@@ -322,9 +324,6 @@ class OchreObservationSpace:
     def get_obs_space_from_ochre(self) -> Tuple[Union[spaces.Dict, spaces.Box], List[str]]:
         """Obtain observation space using an OCHRE dwelling simulation.
 
-        TODO: Are we also going to allow configuration of which equipment-level
-        observations to include? E.g., Electric vs. Gas power, and other details? 
-
         Either returns a composite (Dict) or flattened (vector) observation space.
         This is decided by the observation_space_config.vectorize_observations parameter.
 
@@ -380,7 +379,8 @@ class OchreObservationSpace:
 
         Args:
             control_result (Dict): A dictionary of control results from OCHRE.
-            observation_args (Dict): A dictionary of keyword arguments.        
+            observation_args (Dict): A dictionary of keyword arguments.
+
         Returns:
             A numpy array or a dictionary of observations.
         """
@@ -422,6 +422,7 @@ class OchreObservationSpace:
         
         Args:
             vector_observation (np.array): A vector observation.
+
         Returns:
             dict_obs (OrderedDict): A dictionary of observations.
         """

@@ -1,11 +1,11 @@
-[dwelling]
+[defaults]
 start_time = "2018-01-03 01:00:00"
 time_res = "00:15"
 episode_duration = "3 days"
 initialization_time = "1 days"
-hpxml_file = "home.xml"
-schedule_input_file = "schedules.csv"
-weather_file = "G0600650.epw"
+schedule_input_file = 'schedules.csv'
+weather_file = ''
+hpxml_file = 'home.xml'
 from_beopt = false
 disable_uncontrollable_loads = false
 verbosity = 7
@@ -14,15 +14,15 @@ log_to_console = false
 seed = 1
 save_results = false
 
-[dwelling.actions]
+[defaults.actions]
 HVAC_Cooling = ['Setpoint']
 HVAC_Heating = ['Setpoint']
 Water_Heating = ['Setpoint']
 
-[dwelling.observations]
+[defaults.observations]
 lookahead = "00:15"
 
-[dwelling.reward]
+[defaults.reward]
 thermal_comfort_unit_penalty = 10.0
 thermal_comfort_band_low = 20
 thermal_comfort_band_high = 23
