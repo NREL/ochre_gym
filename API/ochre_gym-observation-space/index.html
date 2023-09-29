@@ -868,8 +868,30 @@ does nothing. Override this in subclass.</p>
         </tr>
     </tbody>
   </table>
-      <p>Returns:
-    observations (Dict): A dictionary of observations.</p>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>observations</code></td>          <td>
+                <code><span title="typing.Dict">Dict</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>A dictionary of observations.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
 
@@ -953,8 +975,30 @@ on the OCHRE control result and extra info.</p>
         </tr>
     </tbody>
   </table>
-      <p>Returns:
-    observations (Dict): The customized dictionary of observations.</p>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>observations</code></td>          <td>
+                <code><span title="typing.Dict">Dict</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The customized dictionary of observations.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
 
@@ -1637,8 +1681,6 @@ for the observation space.</p>
   <div class="doc doc-contents ">
   
       <p>Obtain observation space using an OCHRE dwelling simulation.</p>
-<p>TODO: Are we also going to allow configuration of which equipment-level
-observations to include? E.g., Electric vs. Gas power, and other details? </p>
 <p>Either returns a composite (Dict) or flattened (vector) observation space.
 This is decided by the observation_space_config.vectorize_observations parameter.</p>
 
@@ -1731,7 +1773,7 @@ self.observation_keys.</p>
           </td>
           <td>
             <div class="doc-md-description">
-              <p>A dictionary of keyword arguments.        </p>
+              <p>A dictionary of keyword arguments.</p>
             </div>
           </td>
           <td>
@@ -1740,8 +1782,30 @@ self.observation_keys.</p>
         </tr>
     </tbody>
   </table>
-      <p>Returns:
-    A numpy array or a dictionary of observations.</p>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.Dict">Dict</span>[str, <span title="numpy.ndarray">ndarray</span>]]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>A numpy array or a dictionary of observations.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
 
@@ -1792,8 +1856,30 @@ self.observation_keys.</p>
         </tr>
     </tbody>
   </table>
-      <p>Returns:
-    dict_obs (OrderedDict): A dictionary of observations.</p>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>dict_obs</code></td>          <td>
+                <code><span title="collections.OrderedDict">OrderedDict</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>A dictionary of observations.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
 
