@@ -1,0 +1,35 @@
+[dwelling]
+start_time = "2018-01-03 01:00:00"
+time_res = "00:15"
+episode_duration = "3 days"
+initialization_time = "1 days"
+hpxml_file = "home.xml"
+schedule_input_file = "schedules.csv"
+weather_file = "G0600650.epw"
+from_beopt = false
+disable_uncontrollable_loads = false
+verbosity = 7
+log_to_file = false
+log_to_console = false
+seed = 1
+save_results = false
+
+[dwelling.actions]
+HVAC_Cooling = ['Setpoint']
+HVAC_Heating = ['Setpoint']
+Water_Heating = ['Setpoint']
+
+[dwelling.observations]
+lookahead = "00:15"
+
+[dwelling.reward]
+thermal_comfort_unit_penalty = 10.0
+thermal_comfort_band_low = 20
+thermal_comfort_band_high = 23
+flat_energy_price = 0.5
+reward_scale = 1
+dr_type = 'TOU'
+tou_price_file = "time_of_use_price.csv"
+rtp_price_file = "real_time_price.csv"
+pc_power_file = "dr_power_limit.csv"
+pc_unit_penalty = 10.0
