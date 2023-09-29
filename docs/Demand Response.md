@@ -8,7 +8,7 @@ $$
 r = -(\texttt{energy_used} * \texttt{energy_price} + \texttt{discomfort_penalty}).
 $$
 
-Pricing information for each DR type is stored in a .csv file in the `ochre_gym/energy_price/{DR_SUBFOLDER}` directory, where `DR_SUBFOLDER` is a custom name (e.g., `basic-v0`). This allows users to mix and match buildings with different DR programs. The time resolution of these files should match or be higher than control step time resolution. For example, if the control step time resolution is 15 minutes, the pricing info should be 15 minutes or finer.
+Pricing information for each DR type is stored in a .csv file in the `ochre_gym/energy_price/{DR_SUBFOLDER}` directory, where `DR_SUBFOLDER` is a custom name (e.g., `basic-v0`). This allows users to mix and match buildings with different DR programs. Use the keyword argument `dr_subfolder` (e.g., `dr_subfolder=basic-v0`) in `ochre_gym.load()`. The time resolution of these files should match or be higher than control step time resolution. For example, if the control step time resolution is 15 minutes, the pricing info should be 15 minutes or finer.
 
 ### Real-Time Pricing (RTP)
 
