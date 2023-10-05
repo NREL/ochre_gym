@@ -6,3 +6,5 @@ ochre_gym/buildings/*/*.yaml
 *.egg-info
 site/
 notebooks/
+build/
+dist/

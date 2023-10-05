@@ -9,7 +9,7 @@ from ochre_gym.spaces.act_spaces import ClipActionComposite
 from ochre_gym.ochre_env import Reward
 from ochre_gym import log 
 
-__version__ = "0.1.0"
+__version__ = "0.1.0a1"
 
 THIS_PATH = Path(__file__).parent.absolute()
 

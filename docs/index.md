@@ -14,10 +14,6 @@ OCHRE Gym features:
 
 ## Installation
 
-Install from PyPI with `pip install ochre_gym`.
-
-Or, 
-
 Install in editable mode with `pip install -e .` from the root of this repo.
 
 1. Using `conda` or `venv`, create an environment with `python >= 3.9`: `conda create -n ochre_gym python=3.9`.
@@ -27,6 +23,9 @@ Install in editable mode with `pip install -e .` from the root of this repo.
 
 Test your installation with `unittest` by running `python3 -m unittest` from the root of this repo.
 
+Support for installation via PyPI is coming soon.
+
 ## Getting Started
 
-Check out the Getting Started tab in the sidebar for more details.
+- [Quick start](https://nrel.github.io/ochre_gym/Getting%20Started/basics/)
+- [Stable Baselines3 integration](https://nrel.github.io/ochre_gym/Getting%20Started/stable_baselines/)

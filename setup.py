@@ -1,7 +1,7 @@
 import io
 import os
 import re
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # Read the version from the __init__.py file without importing it
 def read(*names, **kwargs):
@@ -34,8 +34,10 @@ setup(name='ochre_gym',
       install_requires=reqs,
       long_description=open('README.md').read(),
       long_description_content_type='text/markdown',
-      packages=['ochre_gym'],
-      package_data={'ochre_gym': ['buildings/*/*']},
+      packages=find_packages(include=['ochre_gym',
+                                      'ochre_gym.spaces'],
+                             exclude=['test']),
+      package_data={'ochre_gym': ['buildings/*/*', 'buildings/defaults.toml', 'energy_price/*/*']},
       license='BSD 3-Clause',
       keywords=['reinforcement learning', 'hvac', 'building', 'building energy simulation'],
       classifiers=[
