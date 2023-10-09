@@ -14,6 +14,10 @@ OCHRE Gym features:
 
 ## Installation
 
+Install from PyPI `pip install ochre_gym`.
+
+Or,
+
 Install in editable mode with `pip install -e .` from the root of this repo.
 
 1. Using `conda` or `venv`, create an environment with `python >= 3.9`: `conda create -n ochre_gym python=3.9`.

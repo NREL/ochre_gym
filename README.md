@@ -19,6 +19,10 @@ OCHRE Gym features:
 
 ## Installation
 
+Install from PyPI `pip install ochre_gym`.
+
+Or,
+
 Install in editable mode with `pip install -e .` from the root of this repo.
 
 1. Using `conda` or `venv`, create an environment with `python >= 3.9`: `conda create -n ochre_gym python=3.9`.
@@ -27,8 +31,6 @@ Install in editable mode with `pip install -e .` from the root of this repo.
 2. `pip install -e .`
 
 Test your installation with `unittest` by running `python3 -m unittest` from the root of this repo.
-
-Support for installation via PyPI is coming soon.
 
 ## Quick Start
 
@@ -56,7 +58,7 @@ for step in range(1000):
 ```
 
 The `ochre_gym.load()` function will handle creating the OCHRE building simulator instance using the properties, schedule, and weather files located in `ochre_gym/buildings/basic-v0`. 
-Keyword arguments passed to `load` can be used to override the defaults given in the `ochre_gym/buildings/basic-v0/dwelling.toml` config file. 
+Keyword arguments passed to `load` can be used to override the defaults in the `ochre_gym/buildings/defaults.toml` config file. 
 
 ## Funding Acknowledgement
 

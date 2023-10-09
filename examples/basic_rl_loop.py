@@ -1,6 +1,8 @@
 import ochre_gym
 import numpy as np
 
+print('Loading OchreEnv basic-v0...')
+
 env = ochre_gym.load(
     env_name="basic-v0",
     seed=42,
