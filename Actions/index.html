@@ -354,6 +354,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Actions
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -363,6 +374,39 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#action-space" class="md-nav__link">
+    Action space
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-pass-actions-to-the-environment" class="md-nav__link">
+    How to pass actions to the environment
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -610,21 +654,25 @@
 
 
 <h1 id="ochre-gym-actions">OCHRE Gym Actions<a class="headerlink" href="#ochre-gym-actions" title="Permanent link"></a></h1>
-<p>In OCHRE Gym, agents control different types of equipment in the OCHRE Dwelling. Currently, we support controlling HVAC (heating and cooling are separate equipments) and a water heater. OCHRE Gym supports vector action spaces (default) and <strong>nested dictionary</strong> action spaces.For nested dictionary actions, the top-level keys are the names of the OCHRE Dwelling equipment and the second-level keys are the names of the
+<h2 id="action-space">Action space<a class="headerlink" href="#action-space" title="Permanent link"></a></h2>
+<p>In OCHRE Gym, agents control different types of equipment in the OCHRE Dwelling. Currently, we support controlling HVAC (heating and cooling are separate equipments) and a water heater. OCHRE Gym supports vector action spaces and nested dictionary action spaces. For nested dictionary actions, the top-level keys are the names of the OCHRE Dwelling equipment and the second-level keys are the names of the
 available controls for each equipment. The values are the corresponding gym.spaces objects.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The OCHRE simulator internally works with (unordered) nested dictionaries. If a vector action is provided, the OchreEnv will unflatten it, assuming the following order, and convert it into an ordered dictionary. </p>
 </div>
-<h3 id="equipment-types">Equipment types<a class="headerlink" href="#equipment-types" title="Permanent link"></a></h3>
-<p>To summarize, the following OCHRE equipment types are currently supported:</p>
+<div class="admonition warn">
+<p class="admonition-title">Warn</p>
+<p>The OCHRE simulation will throw a ModelException and the current episode will end early if a sequence of actions puts the building into an "invalid" state (e.g., the Water Heater temperature exceeds a threshold and enters an "extreme" state). We provide default lower and upper bounds for the equipment control types to help agents avoid these invalid states early during training. Agents are assigned a large negative reward if the episode terminates early.</p>
+</div>
+<h3 id="equipment-types-and-controls">Equipment types and controls<a class="headerlink" href="#equipment-types-and-controls" title="Permanent link"></a></h3>
+<p>Agents can control 3 types of equipment in an OCHRE residential dwelling:</p>
 <ul>
 <li>HVAC Cooling</li>
 <li>HVAC Heating</li>
 <li>Water Heating</li>
 </ul>
 <p>We have future plans to add PV and Battery equipment types.</p>
-<h3 id="equipment-controls">Equipment controls<a class="headerlink" href="#equipment-controls" title="Permanent link"></a></h3>
 <p>The following ways to control equipment in OCHRE are provided:</p>
 <ul>
 <li>Load Fraction (discrete)</li>
@@ -632,7 +680,104 @@ available controls for each equipment. The values are the corresponding gym.spac
 <li>Setpoint (continuous)</li>
 <li>Deadband (continuous)</li>
 </ul>
-<p>If you are unfamiliar with some of the control types listed above, <strong>we recommend starting with only using Setpoint</strong> and ignoring the rest (default).</p>
+<p>If you are unfamiliar with some of the control types listed above, <strong>we recommend starting with only using Setpoint</strong> and ignoring the rest (default). We provide default lower and upper bounds for the control types listed above. These are specified in <code>ochre_gym/spaces/act_spaces.py</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Equipment type</th>
+<th>Control type</th>
+<th>type</th>
+<th>Default lower bound</th>
+<th>Default upper bound</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HVAC Cooling</td>
+<td>Load Fraction</td>
+<td>Discrete</td>
+<td>0.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>HVAC Cooling</td>
+<td>Duty Cycle</td>
+<td>Continuous</td>
+<td>0.0</td>
+<td>0.2</td>
+</tr>
+<tr>
+<td>HVAC Cooling</td>
+<td>Setpoint</td>
+<td>Continuous</td>
+<td>18.0</td>
+<td>35.0</td>
+</tr>
+<tr>
+<td>HVAC Cooling</td>
+<td>Deadband</td>
+<td>Continuous</td>
+<td>0.1</td>
+<td>10.0</td>
+</tr>
+<tr>
+<td>HVAC Heating</td>
+<td>Load Fraction</td>
+<td>Discrete</td>
+<td>0.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>HVAC Heating</td>
+<td>Duty Cycle</td>
+<td>Continuous</td>
+<td>0.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>HVAC Heating</td>
+<td>Setpoint</td>
+<td>Continuous</td>
+<td>18.0</td>
+<td>35.0</td>
+</tr>
+<tr>
+<td>HVAC Heating</td>
+<td>Deadband</td>
+<td>Continuous</td>
+<td>0.1</td>
+<td>10.0</td>
+</tr>
+<tr>
+<td>Water Heating</td>
+<td>Load Fraction</td>
+<td>Discrete</td>
+<td>0.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Water Heating</td>
+<td>Duty Cycle</td>
+<td>Continuous</td>
+<td>0.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Water Heating</td>
+<td>Setpoint</td>
+<td>Continuous</td>
+<td>25.0</td>
+<td>62.0</td>
+</tr>
+<tr>
+<td>Water Heating</td>
+<td>Deadband</td>
+<td>Continuous</td>
+<td>0.5</td>
+<td>10.0</td>
+</tr>
+</tbody>
+</table>
 <h3 id="customizing-the-action-space">Customizing the action space<a class="headerlink" href="#customizing-the-action-space" title="Permanent link"></a></h3>
 <p>Users are able to customize the equipment and equipment controls in the action space
 if desired with a dictionary config via the <code>override_equipment_controls</code> keyword argument in 
@@ -647,7 +792,8 @@ if desired with a dictionary config via the <code>override_equipment_controls</c
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">)</span>
 </span></code></pre></div>
 <p>Will remove the <code>Water Heating</code> equipment from the Dwelling and only use <code>Setpoint</code> controls for HVAC.</p>
-<h3 id="as-nested-dict">As Nested Dict<a class="headerlink" href="#as-nested-dict" title="Permanent link"></a></h3>
+<h2 id="how-to-pass-actions-to-the-environment">How to pass actions to the environment<a class="headerlink" href="#how-to-pass-actions-to-the-environment" title="Permanent link"></a></h2>
+<h3 id="as-a-nested-dict">As a nested dict<a class="headerlink" href="#as-a-nested-dict" title="Permanent link"></a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="s1">&#39;HVAC Cooling&#39;</span><span class="p">:</span> <span class="p">{</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="s1">&#39;Setpoint&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">23.</span><span class="p">]),</span> <span class="c1"># or 23.</span>
@@ -660,7 +806,7 @@ if desired with a dictionary config via the <code>override_equipment_controls</c
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="p">}</span>
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">}</span>
 </span></code></pre></div>
-<h3 id="vectorized-array">Vectorized Array<a class="headerlink" href="#vectorized-array" title="Permanent link"></a></h3>
+<h3 id="as-an-array">As an array<a class="headerlink" href="#as-an-array" title="Permanent link"></a></h3>
 <p><strong>Vector actions</strong> are numpy arrays arranged as follows:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">HVAC</span> <span class="n">Cooling</span> <span class="o">-</span> <span class="n">Load</span> <span class="n">Fraction</span><span class="p">,</span>
