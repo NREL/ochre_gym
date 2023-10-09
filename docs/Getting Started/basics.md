@@ -17,9 +17,7 @@ env = ochre_gym.load(
 ```
 
 The `ochre_gym.load` function will handle creating the OCHRE building simulator instance using the properties, schedule, and weather files located in `ochre_gym/buildings/basic-v0`. 
-Keyword arguments passed to `load` can be used to override the defaults in the `ochre_gym/buildings/defaults.toml` config file. 
-
-For example, the default observation space is the full OCHRE control result with time stamp and energy price information added, but you can override it to only include a subset of the observations by setting `override_ochre_observations_with_keys` to a list of the desired keys:
+Keyword arguments passed to `load` can be used to override the defaults in the `ochre_gym/buildings/defaults.toml` config file. For example, override the default observation space (the full OCHRE control result with time stamp and energy price information added) by setting `override_ochre_observations_with_keys` to a list of desired keys:
 
 ```python
 import ochre_gym
@@ -43,6 +41,8 @@ This requires passing in the OCHRE building simulator's `dwelling_args`, which i
 For example:
 
 ```python
+from ochre_gym import OchreEnv
+
 env = OchreEnv('basic-v0',
                 dwelling_args,
                 actions = {

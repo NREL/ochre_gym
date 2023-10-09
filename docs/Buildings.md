@@ -18,7 +18,6 @@ For each building, the following files should be located in the same directory u
 - The HPXML file
 - a schedules.csv file for occupancy usage patterns
 - a weather file (TMY .epw or AMY)
-- A TOML file with the default OCHRE Dwelling args called `dwelling.toml`
 
 See an example in `ochre_gym/buildings/basic-v0`. 
 The weather and schedules files should contain a sufficiently long time range spanning the entire episode start/end timestamps.
