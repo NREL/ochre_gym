@@ -1,3 +1,3 @@
 gymnasium==0.28.1
 tomli==2.0.1
-ochre-nrel @ git+https://github.com/NREL/OCHRE@dev
+ochre-nrel==0.8.4

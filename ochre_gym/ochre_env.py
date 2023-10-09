@@ -32,6 +32,7 @@ class OchreEnv(gym.Env):
     """
     metadata = {'large_penalty': -1000}
 
+    @log.redirect_print_statements(logging.getLogger(__name__))
     def __init__(self,
                  env_name: str,
                  dwelling_args: Dict[str, Any],
@@ -72,9 +73,9 @@ class OchreEnv(gym.Env):
         np.random.seed(self.seed)
         random.seed(self.seed)
         self.dwelling_args = dwelling_args
+        self.logger = logger
         self.dwelling = Dwelling(env_name, **dwelling_args)       
         self.dwelling_metadata, _ = hpxml.load_hpxml(**dwelling_args)
-        self.logger = logger
 
         # Remove controllable equipment and appliances from dwelling
         # not specified in the experiment_args

@@ -21,8 +21,8 @@ env = ochre_gym.load(
     thermal_comfort_band=[20, 23],
     verbosity = 7,
     dr_type='RTP',  # TOU, RTP, PC
-    log_to_console=True,
-    log_to_file=False
+    log_to_console=False,
+    log_to_file=True
 )
 
 print(env.action_space)

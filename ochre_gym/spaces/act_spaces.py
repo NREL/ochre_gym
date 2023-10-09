@@ -18,22 +18,22 @@ HVAC_COOLING_ACTIONS = register_equipment_subspace([
         name='Duty Cycle',
         shape=(1,),
         type=SubSpaceType.CONTINUOUS,
-        upper_bound=np.array([0.2]),
-        lower_bound=np.array([0.0])
+        upper_bound=np.array([0.2], dtype=np.float32),
+        lower_bound=np.array([0.0], dtype=np.float32)
     ).register(),
     OchreEquipmentSubSpace(
         name='Setpoint',
         shape=(1,),
         type=SubSpaceType.CONTINUOUS,
-        upper_bound=np.array([35.]),
-        lower_bound=np.array([18.])
+        upper_bound=np.array([35.], dtype=np.float32),
+        lower_bound=np.array([18.], dtype=np.float32)
     ).register(),
     OchreEquipmentSubSpace(
         name='Deadband',
         shape=(1,),
         type=SubSpaceType.CONTINUOUS,
-        upper_bound=np.array([10.0]),
-        lower_bound=np.array([0.1])
+        upper_bound=np.array([10.0], dtype=np.float32),
+        lower_bound=np.array([0.1], dtype=np.float32)
     ).register()
 ])
 
@@ -48,22 +48,22 @@ HVAC_HEATING_ACTIONS = register_equipment_subspace([
         name='Duty Cycle',
         shape=(1,),
         type=SubSpaceType.CONTINUOUS,
-        upper_bound=np.array([1.0]),
-        lower_bound=np.array([0.0])
+        upper_bound=np.array([1.0], dtype=np.float32),
+        lower_bound=np.array([0.0], dtype=np.float32)
     ).register(),
     OchreEquipmentSubSpace(
         name='Setpoint',
         shape=(1,),
         type=SubSpaceType.CONTINUOUS,
-        upper_bound=np.array([35.]),
-        lower_bound=np.array([18.])
+        upper_bound=np.array([35.], dtype=np.float32),
+        lower_bound=np.array([18.], dtype=np.float32)
     ).register(),
     OchreEquipmentSubSpace(
         name='Deadband',
         shape=(1,),
         type=SubSpaceType.CONTINUOUS,
-        upper_bound=np.array([10.0]),
-        lower_bound=np.array([0.1])
+        upper_bound=np.array([10.0], dtype=np.float32),
+        lower_bound=np.array([0.1], dtype=np.float32)
     ).register()
 ])
 
@@ -79,22 +79,22 @@ WATER_HEATING_ACTIONS = register_equipment_subspace([
         name='Duty Cycle',
         shape=(1,),
         type=SubSpaceType.CONTINUOUS,
-        upper_bound=np.array([1.0]),
-        lower_bound=np.array([0.0])
+        upper_bound=np.array([1.0], dtype=np.float32),
+        lower_bound=np.array([0.0], dtype=np.float32)
     ).register(),
     OchreEquipmentSubSpace(
         name='Setpoint',
         shape=(1,),
         type=SubSpaceType.CONTINUOUS,
-        upper_bound=np.array([62.]),
-        lower_bound=np.array([25.]),
+        upper_bound=np.array([62.], dtype=np.float32),
+        lower_bound=np.array([25.], dtype=np.float32),
     ).register(),
     OchreEquipmentSubSpace(
         name='Deadband',
         shape=(1,),
         type=SubSpaceType.CONTINUOUS,
-        upper_bound=np.array([10.0]),
-        lower_bound=np.array([0.5])
+        upper_bound=np.array([10.0], dtype=np.float32),
+        lower_bound=np.array([0.5], dtype=np.float32)
     ).register()    
 ])
 

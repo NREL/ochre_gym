@@ -13,10 +13,12 @@ class TestObsSpace(unittest.TestCase):
 
     def setUp(self) -> None:
         THIS_PATH = Path(__file__).parent.absolute()
-        config_dir = THIS_PATH / '..' / 'ochre_gym' / 'buildings' / 'basic-v0'
-        with open(config_dir / 'dwelling.toml', 'rb') as f:
-            dwelling_args = tomli.load(f)['dwelling']
-        dwelling_args = ochre_gym.parse_dwelling_args(dwelling_args, config_dir)
+        config_dir = THIS_PATH / '..' / 'ochre_gym' / 'buildings' 
+        with open(config_dir / 'defaults.toml', 'rb') as f:
+            dwelling_args = tomli.load(f)['defaults']
+        building_dir = config_dir / 'basic-v0'
+        dwelling_args['weather_file'] = 'G0600650.epw'
+        dwelling_args = ochre_gym.parse_dwelling_args(dwelling_args, building_dir)
         dwelling_args['verbosity'] = 7
 
         self.dwelling = Dwelling('test', **dwelling_args)       

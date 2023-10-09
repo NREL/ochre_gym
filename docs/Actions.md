@@ -1,22 +1,25 @@
 # OCHRE Gym Actions
 
-In OCHRE Gym, agents control different types of equipment in the OCHRE Dwelling. Currently, we support controlling HVAC (heating and cooling are separate equipments) and a water heater. OCHRE Gym supports vector action spaces (default) and **nested dictionary** action spaces.For nested dictionary actions, the top-level keys are the names of the OCHRE Dwelling equipment and the second-level keys are the names of the
+## Action space
+
+In OCHRE Gym, agents control different types of equipment in the OCHRE Dwelling. Currently, we support controlling HVAC (heating and cooling are separate equipments) and a water heater. OCHRE Gym supports vector action spaces and nested dictionary action spaces. For nested dictionary actions, the top-level keys are the names of the OCHRE Dwelling equipment and the second-level keys are the names of the
 available controls for each equipment. The values are the corresponding gym.spaces objects.
 
 !!! note
     The OCHRE simulator internally works with (unordered) nested dictionaries. If a vector action is provided, the OchreEnv will unflatten it, assuming the following order, and convert it into an ordered dictionary. 
 
-### Equipment types
+!!! warn
+    The OCHRE simulation will throw a ModelException and the current episode will end early if a sequence of actions puts the building into an "invalid" state (e.g., the Water Heater temperature exceeds a threshold and enters an "extreme" state). We provide default lower and upper bounds for the equipment control types to help agents avoid these invalid states early during training. Agents are assigned a large negative reward if the episode terminates early.
 
-To summarize, the following OCHRE equipment types are currently supported:
+### Equipment types and controls
+
+Agents can control 3 types of equipment in an OCHRE residential dwelling:
 
 - HVAC Cooling
 - HVAC Heating
 - Water Heating
 
 We have future plans to add PV and Battery equipment types.
-
-### Equipment controls
 
 The following ways to control equipment in OCHRE are provided:
 
@@ -25,7 +28,22 @@ The following ways to control equipment in OCHRE are provided:
 - Setpoint (continuous)
 - Deadband (continuous)
 
-If you are unfamiliar with some of the control types listed above, **we recommend starting with only using Setpoint** and ignoring the rest (default).
+If you are unfamiliar with some of the control types listed above, **we recommend starting with only using Setpoint** and ignoring the rest (default). We provide default lower and upper bounds for the control types listed above. These are specified in `ochre_gym/spaces/act_spaces.py`.
+
+| Equipment type | Control type | type | Default lower bound | Default upper bound |
+| --- | --- | --- | --- | --- |
+| HVAC Cooling | Load Fraction | Discrete | 0.0 | 1.0 |
+| HVAC Cooling | Duty Cycle | Continuous | 0.0 | 0.2 |
+| HVAC Cooling | Setpoint | Continuous | 18.0 | 35.0 |
+| HVAC Cooling | Deadband | Continuous | 0.1 | 10.0 |
+| HVAC Heating | Load Fraction | Discrete | 0.0 | 1.0 |
+| HVAC Heating | Duty Cycle | Continuous | 0.0 | 1.0 |
+| HVAC Heating | Setpoint | Continuous | 18.0 | 35.0 |
+| HVAC Heating | Deadband | Continuous | 0.1 | 10.0 |
+| Water Heating | Load Fraction | Discrete | 0.0 | 1.0 |
+| Water Heating | Duty Cycle | Continuous | 0.0 | 1.0 |
+| Water Heating | Setpoint | Continuous | 25.0 | 62.0 |
+| Water Heating | Deadband | Continuous | 0.5 | 10.0 |
 
 ### Customizing the action space
 
@@ -48,7 +66,9 @@ env = ochre_gym.load(
 
 Will remove the `Water Heating` equipment from the Dwelling and only use `Setpoint` controls for HVAC.
 
-### As Nested Dict
+## How to pass actions to the environment
+
+### As a nested dict
 
 ```python
 {
@@ -64,7 +84,7 @@ Will remove the `Water Heating` equipment from the Dwelling and only use `Setpoi
 }
 ```
 
-### Vectorized Array
+### As an array
 
 **Vector actions** are numpy arrays arranged as follows:
 
