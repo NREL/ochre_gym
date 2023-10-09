@@ -674,7 +674,7 @@
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
 </span></code></pre></div>
 <p>The <code>ochre_gym.load</code> function will handle creating the OCHRE building simulator instance using the properties, schedule, and weather files located in <code>ochre_gym/buildings/basic-v0</code>. 
-Keyword arguments passed to <code>load</code> can be used to override the defaults given in the <code>ochre_gym/buildings/basic-v0/dwelling.toml</code> config file. </p>
+Keyword arguments passed to <code>load</code> can be used to override the defaults in the <code>ochre_gym/buildings/defaults.toml</code> config file. </p>
 <p>For example, the default observation space is the full OCHRE control result with time stamp and energy price information added, but you can override it to only include a subset of the observations by setting <code>override_ochre_observations_with_keys</code> to a list of the desired keys:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span> <span class="nn">ochre_gym</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
