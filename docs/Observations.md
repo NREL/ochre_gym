@@ -1,19 +1,19 @@
-# OCHRE Gym Observations
+# OCHRE™ Gym Observations
 
-The OCHRE Gym observation space is highly customizable to allow users to focus on the most relevant information for their use case. The core set of observations are those provided by the OCHRE building simulator. The OCHRE building simulator records a large number of state variables for the Dwelling---the exact number of variables returned in the OCHRE control result depends on the Dwelling `verbosity` (default = 7, which we do not recommend changing).
+The OCHRE™ Gym observation space is highly customizable to allow users to focus on the most relevant information for their use case. The core set of observations are those provided by the OCHRE™ building simulator. The OCHRE™ building simulator records a large number of state variables for the Dwelling---the exact number of variables returned in the OCHRE™ control result depends on the Dwelling `verbosity` (default = 7, which we do not recommend changing).
 
 The observation space can be configured in the following ways:
 
 - Choose a vector or dictionary space
-- Use all or a predefined reduced subset of OCHRE Dwelling state variables
-- Override the observation space to use only a subset of the OCHRE Dwelling state variables by specifying a list of keys 
+- Use all or a predefined reduced subset of OCHRE™ Dwelling state variables
+- Override the observation space to use only a subset of the OCHRE™ Dwelling state variables by specifying a list of keys 
 - Add timestamp and energy price information to the observation space
 - Add static metadata about the Dwelling to the observation space (e.g., # of bedrooms, square footage, etc.)
 - Add custom values derived from the observation space values by defining the `customize_observation_space_hook` and `customize_observations_from_ochre_hook` methods in a custom `OchreObservationSpaceBaseConfig` class
 
 Vectorized observations sort the keys alphabetically.
 
-### OCHRE keys (OCHRE Dwelling verbosity = 7)
+### OCHRE™ keys (OCHRE™ Dwelling verbosity = 7)
 
 | Name (units) |
 | --- | 
@@ -131,13 +131,13 @@ class MetadataObservationSpaceConfig(TimeAndEnergyPriceObservationSpaceConfig):
                  vectorize_observations,
                  use_all_ochre_observations,
                  override_ochre_observations_with_keys):
-        """Initialize the OCHRE observation space configuration.
+        """Initialize the OCHRE™ observation space configuration.
         
         Args:
             observation_args (Dict): A dictionary of keyword arguments.
             vectorize_observations (bool): Whether to vectorize observations.
-            use_all_ochre_observations (bool): Whether to use all OCHRE observations or not.
-            override_ochre_observations_with_keys (Optional[List[str]]): A list of keys to override the OCHRE observations with. If None, then use all OCHRE observations.
+            use_all_ochre_observations (bool): Whether to use all OCHRE™ observations or not.
+            override_ochre_observations_with_keys (Optional[List[str]]): A list of keys to override the OCHRE™ observations with. If None, then use all OCHRE™ observations.
         """                      
         assert 'dwelling_metadata' in observation_args, '"dwelling_metadata" must be a key in observation_args'
         super().__init__(observation_args,
@@ -168,7 +168,7 @@ class MetadataObservationSpaceConfig(TimeAndEnergyPriceObservationSpaceConfig):
     
 
     def customize_observations_from_ochre_hook(self, observations, control_result, args):
-        """Customize the observations from OCHRE by adding metadata observations.
+        """Customize the observations from OCHRE™ by adding metadata observations.
 
         Args:
             observations (Dict): A dictionary of observations.

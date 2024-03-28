@@ -1,19 +1,19 @@
-# OCHRE Gym Actions
+# OCHRE™ Gym Actions
 
 ## Action space
 
-In OCHRE Gym, agents control different types of equipment in the OCHRE Dwelling. Currently, we support controlling HVAC (heating and cooling are separate equipments) and a water heater. OCHRE Gym supports vector action spaces and nested dictionary action spaces. For nested dictionary actions, the top-level keys are the names of the OCHRE Dwelling equipment and the second-level keys are the names of the
+In OCHRE™ Gym, agents control different types of equipment in the OCHRE™ Dwelling. Currently, we support controlling HVAC (heating and cooling are separate equipments) and a water heater. OCHRE™ Gym supports vector action spaces and nested dictionary action spaces. For nested dictionary actions, the top-level keys are the names of the OCHRE™ Dwelling equipment and the second-level keys are the names of the
 available controls for each equipment. The values are the corresponding gym.spaces objects.
 
 !!! note
-    The OCHRE simulator internally works with (unordered) nested dictionaries. If a vector action is provided, the OchreEnv will unflatten it, assuming the following order, and convert it into an ordered dictionary. 
+    The OCHRE™ simulator internally works with (unordered) nested dictionaries. If a vector action is provided, the OchreEnv will unflatten it, assuming the following order, and convert it into an ordered dictionary. 
 
 !!! warn
-    The OCHRE simulation will throw a ModelException and the current episode will end early if a sequence of actions puts the building into an "invalid" state (e.g., the Water Heater temperature exceeds a threshold and enters an "extreme" state). We provide default lower and upper bounds for the equipment control types to help agents avoid these invalid states early during training. Agents are assigned a large negative reward if the episode terminates early.
+    The OCHRE™ simulation will throw a ModelException and the current episode will end early if a sequence of actions puts the building into an "invalid" state (e.g., the Water Heater temperature exceeds a threshold and enters an "extreme" state). We provide default lower and upper bounds for the equipment control types to help agents avoid these invalid states early during training. Agents are assigned a large negative reward if the episode terminates early.
 
 ### Equipment types and controls
 
-Agents can control 3 types of equipment in an OCHRE residential dwelling:
+Agents can control 3 types of equipment in an OCHRE™ residential dwelling:
 
 - HVAC Cooling
 - HVAC Heating
@@ -21,7 +21,7 @@ Agents can control 3 types of equipment in an OCHRE residential dwelling:
 
 We have future plans to add PV and Battery equipment types.
 
-The following ways to control equipment in OCHRE are provided:
+The following ways to control equipment in OCHRE™ are provided:
 
 - Load Fraction (discrete)
 - Duty Cycle (continuous)

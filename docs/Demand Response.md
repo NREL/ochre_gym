@@ -1,6 +1,6 @@
 # Demand Response
 
-OCHRE Gym supports three different demand response (DR) reward functions: Real-Time Pricing (RTP), Time-of-Use (TOU), and Power Constraints (PC). Our goal is to train agents that can respond to DR signals and reduce the cost of energy use while maintaining comfort. The three DR programs are inspired by the experiments in [this paper](https://arxiv.org/abs/2210.10203).
+OCHRE™ Gym supports three different demand response (DR) reward functions: Real-Time Pricing (RTP), Time-of-Use (TOU), and Power Constraints (PC). Our goal is to train agents that can respond to DR signals and reduce the cost of energy use while maintaining comfort. The three DR programs are inspired by the experiments in [this paper](https://arxiv.org/abs/2210.10203).
 
 The reward function at each time step is calculated as:
 
