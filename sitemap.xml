@@ -2,62 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://nrel.github.io/ochre_gym/</loc>
-         <lastmod>2023-10-09</lastmod>
+         <lastmod>2024-03-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://nrel.github.io/ochre_gym/Actions/</loc>
-         <lastmod>2023-10-09</lastmod>
+         <lastmod>2024-03-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://nrel.github.io/ochre_gym/Buildings/</loc>
-         <lastmod>2023-10-09</lastmod>
+         <lastmod>2024-03-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://nrel.github.io/ochre_gym/Demand%20Response/</loc>
-         <lastmod>2023-10-09</lastmod>
+         <lastmod>2024-03-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://nrel.github.io/ochre_gym/Observations/</loc>
-         <lastmod>2023-10-09</lastmod>
+         <lastmod>2024-03-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://nrel.github.io/ochre_gym/API/ochre_gym-action-space/</loc>
-         <lastmod>2023-10-09</lastmod>
+         <lastmod>2024-03-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://nrel.github.io/ochre_gym/API/ochre_gym-env-reference/</loc>
-         <lastmod>2023-10-09</lastmod>
+         <lastmod>2024-03-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://nrel.github.io/ochre_gym/API/ochre_gym-observation-space/</loc>
-         <lastmod>2023-10-09</lastmod>
+         <lastmod>2024-03-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://nrel.github.io/ochre_gym/API/ochre_gym-reference/</loc>
-         <lastmod>2023-10-09</lastmod>
+         <lastmod>2024-03-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://nrel.github.io/ochre_gym/API/ochre_gym-spaces-reference/</loc>
-         <lastmod>2023-10-09</lastmod>
+         <lastmod>2024-03-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://nrel.github.io/ochre_gym/Getting%20Started/basics/</loc>
-         <lastmod>2023-10-09</lastmod>
+         <lastmod>2024-03-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://nrel.github.io/ochre_gym/Getting%20Started/stable_baselines/</loc>
-         <lastmod>2023-10-09</lastmod>
+         <lastmod>2024-03-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
